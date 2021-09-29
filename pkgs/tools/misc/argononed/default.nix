@@ -18,6 +18,8 @@ stdenv.mkDerivation rec {
     patchShebangs configure
   '';
 
+  makeFlags = [ "RUN_IN_FOREGROUND=1" ];
+
   installPhase = ''
     install -Dm755 build/argononed $out/bin/argononed
     install -Dm755 build/argonone-cli $out/bin/argonone-cli
