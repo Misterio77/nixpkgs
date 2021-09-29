@@ -12320,6 +12320,12 @@
     githubId = 1986844;
     name = "Daniel Wheeler";
   };
+  misterio77 = {
+    name = "Gabriel Fontes";
+    email = "eu@misterio.me";
+    github = "misterio77";
+    githubId = 5727578;
+  };
   misuzu = {
     email = "bakalolka@gmail.com";
     github = "misuzu";

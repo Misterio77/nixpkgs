@@ -3998,6 +3998,8 @@ with pkgs;
 
   agebox = callPackage ../tools/security/agebox { };
 
+  argononed = callPackage ../tools/misc/argononed { };
+
   bore = callPackage ../tools/networking/bore {
     inherit (darwin) Libsystem;
     inherit (darwin.apple_sdk.frameworks) SystemConfiguration;
