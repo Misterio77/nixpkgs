@@ -84,6 +84,15 @@ with lib;
       '';
     };
 
+    noACMEServerAliases = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      example = ["foo.bar" "example.local"];
+      description = ''
+        Server aliases for which certificates should not be generated.
+      '';
+    };
+
     acmeRoot = mkOption {
       type = types.str;
       default = "/var/lib/acme/acme-challenge";

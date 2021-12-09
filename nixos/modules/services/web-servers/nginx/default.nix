@@ -940,7 +940,9 @@ in
       acmePairs = map (vhostConfig: nameValuePair vhostConfig.serverName {
         group = mkDefault cfg.group;
         webroot = vhostConfig.acmeRoot;
-        extraDomainNames = vhostConfig.serverAliases;
+        extraDomainNames = filter (alias:
+          !(builtins.elem alias vhostConfig.noACMEServerAliases)
+        ) vhostConfig.serverAliases;
       # Filter for enableACME-only vhosts. Don't want to create dud certs
       }) (filter (vhostConfig: vhostConfig.useACMEHost == null) acmeEnabledVhosts);
     in listToAttrs acmePairs;
