@@ -53,6 +53,14 @@ in
         '';
       };
 
+      bindIP = mkOption {
+        type = types.int;
+        default = "0.0.0.0";
+        description = ''
+          The IP to which the service should bind.
+        '';
+      };
+
       admins = mkOption {
         type = types.listOf types.str;
         default = [];
@@ -241,6 +249,7 @@ in
           "${cfg.package}/bin/factorio"
           "--config=${cfg.configFile}"
           "--port=${toString cfg.port}"
+          "--bind=${toString cfg.bindIP}"
           "--start-server=${mkSavePath cfg.saveName}"
           "--server-settings=${serverSettingsFile}"
           (optionalString (cfg.mods != []) "--mod-directory=${modDir}")
