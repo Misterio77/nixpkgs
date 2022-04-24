@@ -27,10 +27,10 @@
 , # Allow a configuration attribute set to be passed in as an argument.
   config ? {}
 
-, # List of overlays layers used to extend Nixpkgs.
+, # List or attribute set of overlays layers used to extend Nixpkgs.
   overlays ? []
 
-, # List of overlays to apply to target packages only.
+, # List or attribute set of overlays to apply to target packages only.
   crossOverlays ? []
 
 , # A function booting the final package set for a specific standard
@@ -46,15 +46,24 @@ let # Rename the function arguments
   config0 = config;
   crossSystem0 = crossSystem;
 
-in let
   lib = import ../../lib;
 
+  ensureList = arg: argName:
+    if lib.isAttrs arg then builtins.attrValues arg
+    else if lib.isList arg then arg
+    else throw "The ${argName} argument to nixpkgs must be a list or attribute set.";
+
+  overlays' = ensureList overlays "overlays";
+  crossOverlays' = ensureList crossOverlays "crossOverlays";
+
+in let
   inherit (lib) throwIfNot;
 
+  overlays = overlays';
+  crossOverlays = crossOverlays';
+
   checked =
-    throwIfNot (lib.isList overlays) "The overlays argument to nixpkgs must be a list."
     lib.foldr (x: throwIfNot (lib.isFunction x) "All overlays passed to nixpkgs must be functions.") (r: r) overlays
-    throwIfNot (lib.isList crossOverlays) "The crossOverlays argument to nixpkgs must be a list."
     lib.foldr (x: throwIfNot (lib.isFunction x) "All crossOverlays passed to nixpkgs must be functions.") (r: r) crossOverlays
     ;
 
