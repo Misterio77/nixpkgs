@@ -71,6 +71,14 @@
           <link linkend="opt-services.persistent-evdev.enable">services.persistent-evdev</link>.
         </para>
       </listitem>
+      <listitem>
+        <para>
+          <link xlink:href="https://photoprism.app">PhotoPrism</link>, a
+          self-hosted server-based application for browsing, organizing,
+          and sharing your personal photo collection. Available as
+          <link xlink:href="options.html#opt-services.photoprism.enable">services.photoprism</link>.
+        </para>
+      </listitem>
     </itemizedlist>
   </section>
   <section xml:id="sec-release-22.11-incompatibilities">
