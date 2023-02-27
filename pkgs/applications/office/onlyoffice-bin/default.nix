@@ -12,6 +12,7 @@
 , dconf
 , dpkg
 , fontconfig
+, gcc-unwrapped
 , gdk-pixbuf
 , glib
 , glibc
@@ -62,13 +63,6 @@ let
       "https://github.com/googlefonts/noto-cjk/raw/${version}/NotoSansCJKsc-Regular.otf";
     sha256 = "sha256-aJXSVNJ+p6wMAislXUn4JQilLhimNSedbc9nAuPVxo4=";
   };
-
-  runtimeLibs = lib.makeLibraryPath [
-    curl
-    glibc
-    libudev0-shim
-    pulseaudio
-  ];
 
 in
 stdenv.mkDerivation rec {
@@ -122,6 +116,14 @@ stdenv.mkDerivation rec {
     xorg.libXrender
     xorg.libXScrnSaver
     xorg.libXtst
+  ];
+
+  runtimeLibs = lib.makeLibraryPath [
+    curl
+    glibc
+    gcc-unwrapped.lib
+    libudev0-shim
+    pulseaudio
   ];
 
   dontWrapQtApps = true;
