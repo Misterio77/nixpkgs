@@ -75,6 +75,7 @@ let
     # Tag support
     id3tag        = [ libid3tag ];
     # Misc
+    ipv6          = [];
     dbus          = [ dbus ];
     expat         = [ expat ];
     icu           = [ icu ];
